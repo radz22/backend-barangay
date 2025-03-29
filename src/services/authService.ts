@@ -74,7 +74,7 @@ export const forgotUserPassword = async (email: string) => {
   }
 
   const getUserid = findEmail._id;
-  const resetLink = `http://localhost:5173/page/reset-password/${getUserid}`;
+  const resetLink = `https://barangay-ly7m.onrender.com/page/reset-password/${getUserid}`;
 
   const mailOptions = {
     from: process.env.EMAIL,
