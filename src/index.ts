@@ -12,7 +12,7 @@ const app: Application = express();
 const PORT = 3000;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://barangay-ly7m.onrender.com",
     credentials: true,
   })
 );
