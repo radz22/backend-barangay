@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const resident_controller_1 = require("../controllers/resident-controller");
+const residentRouter = (0, express_1.Router)();
+residentRouter.post("/", resident_controller_1.createResident);
+residentRouter.get("/", resident_controller_1.getAllResidentt);
+residentRouter.get("/:id", resident_controller_1.getResidentById);
+residentRouter.delete("/:id", resident_controller_1.deleteResidentbyId);
+exports.default = residentRouter;
