@@ -71,9 +71,9 @@ export const authSignup = async (
 };
 
 export const authLogout = (req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.clearCookie("email");
-  res.clearCookie("role");
+  res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "none" });
+  res.clearCookie("email", { httpOnly: true, secure: true, sameSite: "none" });
+  res.clearCookie("role", { httpOnly: true, secure: true, sameSite: "none" });
 
   res.status(200).json({ message: "Logout successful" });
 };
