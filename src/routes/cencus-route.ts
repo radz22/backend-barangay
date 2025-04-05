@@ -13,6 +13,6 @@ cencusRouter.get("/", getAllData);
 cencusRouter.get("/user/:id", getCencusDatabyId);
 cencusRouter.delete("/:id", deleteCencusbyId);
 cencusRouter.delete("/archive/:id", deleteArchiveCencusbyId);
-cencusRouter.post("/restore/:id", deleteArchiveCencusbyId);
+cencusRouter.post("/restore", deleteArchiveCencusbyId);
 
 export default cencusRouter;
