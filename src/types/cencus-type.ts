@@ -181,6 +181,8 @@ export const CencusSchema = z.object({
       })
     )
     .optional(),
+
+  archived: z.boolean().default(false).optional(),
 });
 
 export type cencusType = z.infer<typeof CencusSchema>;

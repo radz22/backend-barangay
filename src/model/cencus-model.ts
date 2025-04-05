@@ -19,7 +19,7 @@ const CensusSchema: Schema = new Schema(
     },
     civilstatus: {
       type: String,
-      enum: ["single", "married", "widowed", "seperated"], // Note: Keep same spelling as Zod
+      enum: ["single", "married", "widowed", "seperated"],
       required: true,
     },
     currentschoolenrollment: {
@@ -192,6 +192,7 @@ const CensusSchema: Schema = new Schema(
       ],
       required: false, // Matches Zod's .optional()
     },
+    archived: { type: Boolean, default: false },
   },
   {
     timestamps: true,
