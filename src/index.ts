@@ -10,9 +10,14 @@ import cookieRoute from "./routes/cookie-route";
 import residentRouter from "./routes/resident-route";
 const app: Application = express();
 const PORT = 3000;
+const allowedOrigins = [
+  "https://barangay-ly7m.onrender.com",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: "https://barangay-ly7m.onrender.com",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
