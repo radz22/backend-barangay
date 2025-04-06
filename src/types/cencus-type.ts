@@ -183,6 +183,9 @@ export const CencusSchema = z.object({
     .optional(),
 
   archived: z.boolean().default(false).optional(),
+  descriptor: z
+    .array(z.number())
+    .min(1, "Array must contain at least one number"),
 });
 
 export type cencusType = z.infer<typeof CencusSchema>;

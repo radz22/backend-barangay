@@ -193,6 +193,7 @@ const CensusSchema: Schema = new Schema(
       required: false, // Matches Zod's .optional()
     },
     archived: { type: Boolean, default: false },
+    descriptor: { type: [Number], required: true },
   },
   {
     timestamps: true,
