@@ -5,6 +5,7 @@ interface ICensusDocument extends cencusType, Document {}
 
 const CensusSchema: Schema = new Schema(
   {
+    staffaccountcreate: { type: String, required: false },
     dateofcencus: { type: String, required: false },
     areaofcencusstreet: { type: String, required: false },
     firstname: { type: String, required: true },

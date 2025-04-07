@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const CencusSchema = z.object({
+  staffaccountcreate: z.string().optional(),
   dateofcencus: z.string().optional(),
   areaofcencusstreet: z.string().optional(),
   firstname: z.string().min(1, "First Name is Required"),

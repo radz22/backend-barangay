@@ -4,22 +4,52 @@ import { CustomError } from "../utils/customError";
 import { Resident } from "../model/resident-modal";
 import { cencusContinueModel } from "../model/cencus-continue-model";
 export const createCencusService = async (datacencus: cencusType) => {
-  console.log(datacencus);
+  const existingCencus = await cencusModel.findOne({
+    firstname: datacencus.firstname,
+    lastname: datacencus.lastname,
+    middlename: datacencus.middlename,
+  });
+
+  if (existingCencus) {
+    throw new CustomError("Household Head already exists", 400);
+  }
   const createCencus = await cencusModel.create(datacencus);
 
+  await Resident.create({
+    firstName: datacencus.firstname,
+    lastName: datacencus.lastname,
+    middlename: datacencus.middlename,
+    dateofbirth: datacencus.birthday,
+    gender: datacencus.gender,
+    civilstatus: datacencus.civilstatus,
+  });
   if (datacencus.householdMembers && datacencus.householdMembers.length > 0) {
-    const residentData = datacencus.householdMembers.map((member) => ({
-      firstName: member.firstname,
-      lastName: member.lastname,
-      middlename: member.middlename,
-      dateofbirth: member.birthday,
-      gender: member.gender,
-      civilstatus: member.civilstatus,
-    }));
+    const memberCreationPromises = datacencus?.householdMembers.map(
+      async (member) => {
+        const existingResident = await Resident.findOne({
+          firstName: member.firstname,
+          lastName: member.lastname,
+          middlename: member.middlename,
+        });
 
-    await Resident.insertMany(residentData);
+        if (!existingResident) {
+          return Resident.create({
+            firstName: member.firstname,
+            lastName: member.lastname,
+            middlename: member.middlename,
+            dateofbirth: member.birthday,
+            gender: member.gender,
+            civilstatus: member.civilstatus,
+          });
+        }
+        return null;
+      }
+    );
+
+    await Promise.all(memberCreationPromises);
   }
-  return { createCencus, message: "Sucess Created" };
+
+  return { createCencus, message: "Successfully Created" };
 };
 
 export const getAllCencusData = async () => {
