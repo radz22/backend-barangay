@@ -16,12 +16,15 @@ export const createCencusService = async (datacencus: cencusType) => {
   const createCencus = await cencusModel.create(datacencus);
 
   await Resident.create({
+    cencusid: createCencus._id,
     firstName: datacencus.firstname,
     lastName: datacencus.lastname,
     middlename: datacencus.middlename,
     dateofbirth: datacencus.birthday,
     gender: datacencus.gender,
     civilstatus: datacencus.civilstatus,
+    descriptor: datacencus.descriptor,
+    staffaccountcreate: datacencus.staffaccountcreate,
   });
   if (datacencus.householdMembers && datacencus.householdMembers.length > 0) {
     const memberCreationPromises = datacencus?.householdMembers.map(
@@ -34,12 +37,14 @@ export const createCencusService = async (datacencus: cencusType) => {
 
         if (!existingResident) {
           return Resident.create({
+            cencusid: createCencus._id,
             firstName: member.firstname,
             lastName: member.lastname,
             middlename: member.middlename,
             dateofbirth: member.birthday,
             gender: member.gender,
             civilstatus: member.civilstatus,
+            staffaccountcreate: datacencus.staffaccountcreate,
           });
         }
         return null;

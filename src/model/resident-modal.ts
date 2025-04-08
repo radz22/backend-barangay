@@ -4,6 +4,8 @@ interface IResident extends ResidentType, Document {}
 
 const ResidentSchema = new Schema<IResident>(
   {
+    staffaccountcreate: { type: String, required: false },
+    cencusid: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     middlename: { type: String },

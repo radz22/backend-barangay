@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const residentSchema = z.object({
+  staffaccountcreate: z.string().optional(),
+  cencusid: z.string().min(1, "Census ID is required"),
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   middlename: z.string().optional(),
