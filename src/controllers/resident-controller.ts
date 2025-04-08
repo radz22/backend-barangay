@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { residentSchema } from "../types/resident-type";
 import { createResidentService } from "../services/resident-resident";
+import { Resident } from "../model/resident-modal";
+import { CustomError } from "../utils/customError";
 import {
   getAllResident,
   getResidentId,
@@ -69,6 +71,46 @@ export const deleteResidentbyId = async (
       data: deleteData,
       message: "Deleted Successfully",
     });
+  } catch (error) {
+    next(error);
+  }
+};
+export const registerFaceResident = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { descriptor } = req.body;
+    const faceRegister = await Resident.findByIdAndUpdate(
+      { _id: id },
+      { descriptor: descriptor }
+    );
+
+    if (!faceRegister) {
+      throw new CustomError("Face Register Failed", 400);
+    }
+
+    res.status(200).json({
+      data: faceRegister,
+      message: "Face Register Successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getResidentWithDescriptor = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const residents = await Resident.find({
+      descriptor: { $exists: true, $size: 128 },
+    });
+    res.json(residents);
   } catch (error) {
     next(error);
   }
