@@ -101,6 +101,63 @@ export const registerFaceResident = async (
   }
 };
 
+export const updateResident = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const {
+      firstName,
+      lastName,
+      middlename,
+      dateofbirth,
+      gender,
+      civilstatus,
+      nationality,
+      mobilenumber,
+      address,
+      streetname,
+      province,
+      isUpdated,
+    } = req.body;
+
+    const updateData = {
+      firstName,
+      lastName,
+      middlename,
+      dateofbirth,
+      gender,
+      civilstatus,
+      nationality,
+      mobilenumber,
+      address,
+      streetname,
+      province,
+      isUpdated,
+    };
+
+    // Use findByIdAndUpdate to update the resident's data
+    const updatedResident = await Resident.findByIdAndUpdate(id, updateData, {
+      new: true, // To return the updated document
+      runValidators: true, // To ensure validation is applied during update
+    });
+
+    if (!updatedResident) {
+      throw new CustomError("Resident not found", 404);
+    }
+
+    // Send the updated resident data in the response
+    res.status(200).json({
+      data: updatedResident,
+      message: "Resident updated successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getResidentWithDescriptor = async (
   req: Request,
   res: Response,

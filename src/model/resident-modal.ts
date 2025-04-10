@@ -22,6 +22,7 @@ const ResidentSchema = new Schema<IResident>(
     streetname: { type: String, required: false },
     province: { type: String, required: false },
     descriptor: { type: [Number], required: false },
+    isUpdated: { type: Boolean, default: false },
   },
   {
     timestamps: true,
