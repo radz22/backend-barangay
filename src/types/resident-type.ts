@@ -24,7 +24,6 @@ export const residentSchema = z.object({
   streetname: z.string().min(1, "Street name is required").optional(),
   province: z.string().min(1, "Province is required").optional(),
   descriptor: z.array(z.number()).optional(),
-  isUpdated: z.boolean().optional().default(false),
 });
 
 export type ResidentType = z.infer<typeof residentSchema>;

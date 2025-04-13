@@ -1,11 +1,10 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { ResidentType } from "../types/resident-type";
-interface IResident extends ResidentType, Document {}
+import { residentUpdate } from "../types/resident-update-type";
+interface IResident extends residentUpdate, Document {}
 
-const ResidentSchema = new Schema<IResident>(
+const ResidenUpdateSchema = new Schema<IResident>(
   {
-    staffaccountcreate: { type: String, required: false },
-    cencusid: { type: String, required: true },
+    updateid: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     middlename: { type: String },
@@ -21,11 +20,15 @@ const ResidentSchema = new Schema<IResident>(
     address: { type: String, required: false },
     streetname: { type: String, required: false },
     province: { type: String, required: false },
-    descriptor: { type: [Number], required: false },
+    cloudinaryphoto: { type: String, required: true },
+    cloudinaryid: { type: String, required: true },
   },
   {
     timestamps: true,
   }
 );
 
-export const Resident = mongoose.model<IResident>("Resident", ResidentSchema);
+export const ResidentUpdateModel = mongoose.model<IResident>(
+  "ResidentUpdate",
+  ResidenUpdateSchema
+);

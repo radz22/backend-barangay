@@ -3,6 +3,9 @@ import { residentSchema } from "../types/resident-type";
 import { createResidentService } from "../services/resident-resident";
 import { Resident } from "../model/resident-modal";
 import { CustomError } from "../utils/customError";
+import { ResidentUpdateModel } from "../model/resident-admin-update-validation-model";
+import cloudinary from "../utils/cloudinary";
+import { reasonMessageModel } from "../model/reason-message-decline-model";
 import {
   getAllResident,
   getResidentId,
@@ -120,7 +123,7 @@ export const updateResident = async (
       address,
       streetname,
       province,
-      isUpdated,
+      cloudinaryid,
     } = req.body;
 
     const updateData = {
@@ -135,10 +138,8 @@ export const updateResident = async (
       address,
       streetname,
       province,
-      isUpdated,
     };
 
-    // Use findByIdAndUpdate to update the resident's data
     const updatedResident = await Resident.findByIdAndUpdate(id, updateData, {
       new: true, // To return the updated document
       runValidators: true, // To ensure validation is applied during update
@@ -147,6 +148,13 @@ export const updateResident = async (
     if (!updatedResident) {
       throw new CustomError("Resident not found", 404);
     }
+    await ResidentUpdateModel.findOneAndDelete({
+      updateid: id,
+    });
+    await reasonMessageModel.findOneAndDelete({
+      reasonid: id,
+    });
+    await cloudinary.v2.uploader.destroy(cloudinaryid);
 
     // Send the updated resident data in the response
     res.status(200).json({
