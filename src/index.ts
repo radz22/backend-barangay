@@ -17,10 +17,10 @@ const PORT = 3000;
 const allowedOrigins = [
   "https://barangay-ly7m.onrender.com",
   "http://localhost:5173",
-  "https://smartbarangayconnect.com",
-  "https://drs.smartbarangayconnect.com",
-  "https://cyms.smartbarangayconnect.com",
-  "https://bciacms.smartbarangayconnect.com",
+  // "https://smartbarangayconnect.com",
+  // "https://drs.smartbarangayconnect.com",
+  // "https://cyms.smartbarangayconnect.com",
+  // "https://bciacms.smartbarangayconnect.com",
 ];
 const corsOptions = {
   origin: function (
