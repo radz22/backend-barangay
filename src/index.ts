@@ -22,13 +22,20 @@ const allowedOrigins = [
   "https://cyms.smartbarangayconnect.com",
   "https://bciacms.smartbarangayconnect.com",
 ];
-
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "100mb" }));
 app.use(cookieParser());
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
