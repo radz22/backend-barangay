@@ -4,7 +4,6 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/mongodb-connection";
 import { errorHandler } from "./middleware/error-handler";
-import bodyParser from "body-parser";
 import authRouter from "./routes/auth-route";
 import cencusRouter from "./routes/cencus-route";
 import cookieRoute from "./routes/cookie-route";
@@ -17,10 +16,10 @@ const PORT = 3000;
 const allowedOrigins = [
   "https://barangay-ly7m.onrender.com",
   "http://localhost:5173",
-  // "https://smartbarangayconnect.com",
-  // "https://drs.smartbarangayconnect.com",
-  // "https://cyms.smartbarangayconnect.com",
-  // "https://bciacms.smartbarangayconnect.com",
+  "https://smartbarangayconnect.com",
+  "https://drs.smartbarangayconnect.com",
+  "https://cyms.smartbarangayconnect.com",
+  "https://bciacms.smartbarangayconnect.com",
 ];
 const corsOptions = {
   origin: function (
@@ -37,8 +36,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use(express.json({ limit: "100mb" }));
-app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/cencus", cencusRouter);
 app.use("/api/cookie", cookieRoute);
