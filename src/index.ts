@@ -10,6 +10,7 @@ import cookieRoute from "./routes/cookie-route";
 import residentRouter from "./routes/resident-route";
 import imageDetectionRoute from "./routes/image-detection-route";
 import residentAdminValidationUpdateRoute from "./routes/resident-admin-update-validation-route";
+import verificationCodeRoute from "./routes/verification-code-route";
 const app: Application = express();
 const PORT = 3000;
 
@@ -43,6 +44,7 @@ app.use("/api/cookie", cookieRoute);
 app.use("/api/resident", residentRouter);
 app.use("/api/image", imageDetectionRoute);
 app.use("/api/residentupdate", residentAdminValidationUpdateRoute);
+app.use("/api/verification", verificationCodeRoute);
 
 app.use(errorHandler);
 

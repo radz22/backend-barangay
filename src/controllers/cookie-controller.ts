@@ -10,7 +10,7 @@ export const getCookies = (
     const { token, email, role } = req.cookies;
 
     if (!token || !email || !role) {
-      throw new CustomError("Unauthorized: No cookies found", 401); // ✅ Use 401 Unauthorized
+      throw new CustomError("Unauthorized: No cookies found", 401);
     }
 
     res.status(200).json({

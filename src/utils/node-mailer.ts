@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport({
 
 const SendEmail = async (data: any) => {
   try {
-    await transporter.sendMail(data);
-    return true;
+    const info = await transporter.sendMail(data);
+    return info;
   } catch (error) {
     return false;
   }

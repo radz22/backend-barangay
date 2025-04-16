@@ -36,7 +36,7 @@ export const login = async ({ email, password }: signin) => {
 
   const token = generateToken({ id: user._id });
 
-  return { user, token };
+  return { user, token, status: true };
 };
 export const userData = async (id: string) => {
   const authToken = verifyToken(id);

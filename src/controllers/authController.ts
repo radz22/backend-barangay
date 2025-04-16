@@ -10,39 +10,35 @@ import { IUser, signin } from "../types/user-type";
 import { signupSchema, signinSchema } from "../validation/auth-validation";
 import { authModel } from "../model/authModel";
 import { CustomError } from "../utils/customError";
+import { generateVerificationCode } from "../utils/generate-verification-code";
+import SendEmail from "../utils/node-mailer";
+import { VerificationCode } from "../model/verification-code.model";
 export const authSignin = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
-    const validatedData: signin = signinSchema.parse(req.body);
+    const { email, password } = req.body;
+    const validatedData: signin = signinSchema.parse({ email, password });
+    await login(validatedData);
+    const code = generateVerificationCode();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
 
-    const { user, token } = await login(validatedData);
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Your Verification Code",
+      text: `Your verification code is: ${code}`,
+      html: `<p>Your verification code is: <strong>${code}</strong></p>`,
+    };
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    res.cookie("email", user.email, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    res.cookie("role", user.role, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-    res.status(200).json({
-      message: "Login successful",
-      user: { id: user._id, email: user.email, role: user.role },
-    });
+    const emailSent = await SendEmail(mailOptions);
+    if (!emailSent) {
+      throw new CustomError("Email not sent", 404);
+    }
+    await VerificationCode.create({ email, code, expiresAt });
+    res.status(200).json({ message: "OTP sent in your email" });
   } catch (error) {
     next(error);
   }
