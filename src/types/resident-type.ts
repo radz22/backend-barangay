@@ -12,6 +12,8 @@ export const residentSchema = z.object({
     .refine((date) => {
       return !isNaN(Date.parse(date));
     }, "Invalid date format"),
+
+  age: z.number().min(1, "Age is Required"),
   gender: z.enum(["female", "male"]),
 
   civilstatus: z.enum(["single", "married", "widowed", "seperated"], {

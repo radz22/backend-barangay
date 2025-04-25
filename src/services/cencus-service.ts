@@ -25,6 +25,7 @@ export const createCencusService = async (datacencus: cencusType) => {
     civilstatus: datacencus.civilstatus,
     descriptor: datacencus.descriptor,
     staffaccountcreate: datacencus.staffaccountcreate,
+    age: datacencus.age,
   });
   if (datacencus.householdMembers && datacencus.householdMembers.length > 0) {
     const memberCreationPromises = datacencus?.householdMembers.map(
@@ -45,6 +46,7 @@ export const createCencusService = async (datacencus: cencusType) => {
             gender: member.gender,
             civilstatus: member.civilstatus,
             staffaccountcreate: datacencus.staffaccountcreate,
+            age: member.age,
           });
         }
         return null;

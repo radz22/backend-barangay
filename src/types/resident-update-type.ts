@@ -4,6 +4,7 @@ export interface residentUpdate {
   lastName: string;
   middlename: string;
   dateofbirth: string;
+  age: number;
   gender: string;
   civilstatus: string;
   nationality: string;

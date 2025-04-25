@@ -22,6 +22,7 @@ export const createResidentUpdate = async (
       address,
       streetname,
       province,
+      age,
       image,
     } = req.body;
 
@@ -47,6 +48,7 @@ export const createResidentUpdate = async (
       address,
       streetname,
       province,
+      age,
       cloudinaryphoto: uploadedResponse.url,
       cloudinaryid: uploadedResponse.public_id,
     };
@@ -81,9 +83,10 @@ export const decline = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { reasonid, reason } = req.body;
+    const { reasonid, reason, cloudinaryid } = req.body;
 
     await ResidentUpdateModel.findOneAndDelete({ updateid: reasonid });
+    await cloudinary.v2.uploader.destroy(cloudinaryid);
 
     const existingReason = await reasonMessageModel.findOne({ reasonid });
 

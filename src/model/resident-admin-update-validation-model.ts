@@ -9,6 +9,7 @@ const ResidenUpdateSchema = new Schema<IResident>(
     lastName: { type: String, required: true },
     middlename: { type: String },
     dateofbirth: { type: String, required: true },
+    age: { type: Number, required: true },
     gender: { type: String, required: true, enum: ["female", "male"] },
     civilstatus: {
       type: String,

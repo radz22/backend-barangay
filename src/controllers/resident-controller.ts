@@ -116,6 +116,7 @@ export const updateResident = async (
       lastName,
       middlename,
       dateofbirth,
+      age,
       gender,
       civilstatus,
       nationality,
@@ -131,6 +132,7 @@ export const updateResident = async (
       lastName,
       middlename,
       dateofbirth,
+      age,
       gender,
       civilstatus,
       nationality,
@@ -141,8 +143,8 @@ export const updateResident = async (
     };
 
     const updatedResident = await Resident.findByIdAndUpdate(id, updateData, {
-      new: true, // To return the updated document
-      runValidators: true, // To ensure validation is applied during update
+      new: true,
+      runValidators: true,
     });
 
     if (!updatedResident) {
@@ -156,7 +158,6 @@ export const updateResident = async (
     });
     await cloudinary.v2.uploader.destroy(cloudinaryid);
 
-    // Send the updated resident data in the response
     res.status(200).json({
       data: updatedResident,
       message: "Resident updated successfully",

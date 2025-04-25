@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { faceModel } from "../model/image-detection-model";
 import { Resident } from "../model/resident-modal";
+import { CustomError } from "../utils/customError";
 export const createFace = async (
   req: Request,
   res: Response,
@@ -53,6 +54,28 @@ export const getFirstAndLastName = async (
     }
 
     res.status(200).json(resident);
+  } catch (error) {
+    next(error);
+  }
+};
+export const verifyResident = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { firstName, lastName } = req.body;
+
+    const resident = await Resident.findOne({ firstName, lastName });
+
+    if (!resident) {
+      throw new CustomError("Resident not found", 404);
+    }
+
+    res.status(200).json({
+      firstName,
+      lastName,
+    });
   } catch (error) {
     next(error);
   }
