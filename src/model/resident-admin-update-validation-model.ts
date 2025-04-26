@@ -23,6 +23,18 @@ const ResidenUpdateSchema = new Schema<IResident>(
     province: { type: String, required: false },
     cloudinaryphoto: { type: String, required: true },
     cloudinaryid: { type: String, required: true },
+
+    citizenship: { type: String, required: true },
+    city: { type: String, required: true },
+    currentschoolenrollment: { type: String, required: true },
+    educationalattainment: { type: String, required: true },
+    emailadress: { type: String, required: true },
+    emergencycontactname: { type: String, required: true },
+    emergencycontactnumber: { type: Number, required: false },
+    employmentstatus: { type: String, required: true },
+    placeofbirth: { type: String, required: true },
+    relationshiptoemergencycontact: { type: String, required: true },
+    schooltype: { type: String, required: true },
   },
   {
     timestamps: true,

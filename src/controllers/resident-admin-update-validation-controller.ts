@@ -24,6 +24,17 @@ export const createResidentUpdate = async (
       province,
       age,
       image,
+      citizenship,
+      city,
+      currentschoolenrollment,
+      educationalattainment,
+      emailadress,
+      emergencycontactname,
+      emergencycontactnumber,
+      employmentstatus,
+      placeofbirth,
+      relationshiptoemergencycontact,
+      schooltype,
     } = req.body;
 
     const existResident = await ResidentUpdateModel.findOne({ updateid });
@@ -51,6 +62,18 @@ export const createResidentUpdate = async (
       age,
       cloudinaryphoto: uploadedResponse.url,
       cloudinaryid: uploadedResponse.public_id,
+
+      citizenship,
+      city,
+      currentschoolenrollment,
+      educationalattainment,
+      emailadress,
+      emergencycontactname,
+      emergencycontactnumber,
+      employmentstatus,
+      placeofbirth,
+      relationshiptoemergencycontact,
+      schooltype,
     };
 
     const createUpdateResident = await ResidentUpdateModel.create(updateData);

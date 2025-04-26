@@ -14,4 +14,16 @@ export interface residentUpdate {
   province: string;
   cloudinaryphoto: string;
   cloudinaryid: string;
+
+  citizenship: string;
+  city: string;
+  currentschoolenrollment: string;
+  educationalattainment: string;
+  emailadress: string;
+  emergencycontactname: string;
+  emergencycontactnumber: number;
+  employmentstatus: string;
+  placeofbirth: string;
+  relationshiptoemergencycontact: string;
+  schooltype: string;
 }

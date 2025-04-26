@@ -119,12 +119,22 @@ export const updateResident = async (
       age,
       gender,
       civilstatus,
-      nationality,
       mobilenumber,
-      address,
       streetname,
       province,
       cloudinaryid,
+
+      citizenship,
+      city,
+      currentschoolenrollment,
+      educationalattainment,
+      emailadress,
+      emergencycontactname,
+      emergencycontactnumber,
+      employmentstatus,
+      placeofbirth,
+      relationshiptoemergencycontact,
+      schooltype,
     } = req.body;
 
     const updateData = {
@@ -135,11 +145,21 @@ export const updateResident = async (
       age,
       gender,
       civilstatus,
-      nationality,
       mobilenumber,
-      address,
       streetname,
       province,
+
+      citizenship,
+      city,
+      currentschoolenrollment,
+      educationalattainment,
+      emailadress,
+      emergencycontactname,
+      emergencycontactnumber,
+      employmentstatus,
+      placeofbirth,
+      relationshiptoemergencycontact,
+      schooltype,
     };
 
     const updatedResident = await Resident.findByIdAndUpdate(id, updateData, {

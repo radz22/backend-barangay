@@ -26,6 +26,23 @@ export const createCencusService = async (datacencus: cencusType) => {
     descriptor: datacencus.descriptor,
     staffaccountcreate: datacencus.staffaccountcreate,
     age: datacencus.age,
+
+    // New fields
+    citizenship: datacencus.citizenship,
+    placeofbirth: datacencus.placeofbirth,
+    emailadress: datacencus.emailadress,
+    schooltype: datacencus.schooltype,
+    educationalattainment: datacencus.educationalattainment,
+    employmentstatus: datacencus.employmentstatus,
+    currentschoolenrollment: datacencus.currentschoolenrollment,
+    emergencycontactname: datacencus.emergencycontactname,
+    emergencycontactnumber: datacencus.emergencycontactnumber,
+    relationshiptoemergencycontact: datacencus.relationshiptoemergencycontact,
+
+    mobilenumber: datacencus.mobilenumber,
+    city: datacencus.city,
+    streetname: datacencus.streetname,
+    province: datacencus.province,
   });
   if (datacencus.householdMembers && datacencus.householdMembers.length > 0) {
     const memberCreationPromises = datacencus?.householdMembers.map(
@@ -47,6 +64,23 @@ export const createCencusService = async (datacencus: cencusType) => {
             civilstatus: member.civilstatus,
             staffaccountcreate: datacencus.staffaccountcreate,
             age: member.age,
+
+            citizenship: member.citizenship,
+            placeofbirth: member.placeofbirth,
+            emailadress: member.emailaddress,
+            schooltype: member.schooltype,
+            educationalattainment: member.educationalattainment,
+            employmentstatus: member.employmentstatus,
+            currentschoolenrollment: member.currentschoolenrollment,
+            emergencycontactname: member.emergencycontactname,
+            emergencycontactnumber: member.emergencycontactnumber,
+            relationshiptoemergencycontact:
+              member.relationshiptoemergencycontact,
+
+            mobilenumber: member.mobilenumber,
+            city: datacencus.city,
+            streetname: datacencus.streetname,
+            province: datacencus.province,
           });
         }
         return null;
