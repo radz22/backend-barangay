@@ -201,3 +201,51 @@ export const getResidentWithDescriptor = async (
     next(error);
   }
 };
+
+export const archived = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+
+    const updateResident = await Resident.findByIdAndUpdate(id, {
+      archived: true,
+    });
+
+    if (!updateResident) {
+      throw new CustomError("Error", 404);
+    }
+
+    res.status(200).json({
+      message: "Successful Deleted",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const restore = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+
+    const updateResident = await Resident.findByIdAndUpdate(id, {
+      archived: false,
+    });
+
+    if (!updateResident) {
+      throw new CustomError("Error", 404);
+    }
+
+    res.status(200).json({
+      message: "Successful Restore",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
