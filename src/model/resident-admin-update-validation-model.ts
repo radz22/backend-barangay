@@ -35,6 +35,9 @@ const ResidenUpdateSchema = new Schema<IResident>(
     placeofbirth: { type: String, required: true },
     relationshiptoemergencycontact: { type: String, required: true },
     schooltype: { type: String, required: true },
+
+    documents: { type: String, required: true },
+    reason: { type: String, required: true },
   },
   {
     timestamps: true,

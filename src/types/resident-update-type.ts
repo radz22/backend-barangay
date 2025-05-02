@@ -26,4 +26,7 @@ export interface residentUpdate {
   placeofbirth: string;
   relationshiptoemergencycontact: string;
   schooltype: string;
+
+  documents: string;
+  reason: string;
 }

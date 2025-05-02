@@ -35,6 +35,9 @@ export const createResidentUpdate = async (
       placeofbirth,
       relationshiptoemergencycontact,
       schooltype,
+
+      reason,
+      documents,
     } = req.body;
 
     const existResident = await ResidentUpdateModel.findOne({ updateid });
@@ -74,6 +77,9 @@ export const createResidentUpdate = async (
       placeofbirth,
       relationshiptoemergencycontact,
       schooltype,
+
+      reason,
+      documents,
     };
 
     const createUpdateResident = await ResidentUpdateModel.create(updateData);
