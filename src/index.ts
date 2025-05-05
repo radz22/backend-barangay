@@ -23,6 +23,8 @@ const allowedOrigins = [
   "https://drs.smartbarangayconnect.com",
   "https://cyms.smartbarangayconnect.com",
   "https://bciacms.smartbarangayconnect.com",
+  "https://schedulingandappointment.lgu2.com/landing_index.php",
+  "https://schedulingandappointment.lgu2.com",
 ];
 const corsOptions = {
   origin: function (
