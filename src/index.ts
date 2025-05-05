@@ -11,6 +11,8 @@ import residentRouter from "./routes/resident-route";
 import imageDetectionRoute from "./routes/image-detection-route";
 import residentAdminValidationUpdateRoute from "./routes/resident-admin-update-validation-route";
 import verificationCodeRoute from "./routes/verification-code-route";
+import bodyParser from "body-parser";
+
 const app: Application = express();
 const PORT = 3000;
 
@@ -37,7 +39,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use("/api/auth", authRouter);
 app.use("/api/cencus", cencusRouter);
 app.use("/api/cookie", cookieRoute);
